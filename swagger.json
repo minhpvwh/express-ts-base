@@ -1,0 +1,3560 @@
+{
+    "swagger": "3.0",
+    "info": {
+        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+        "version": "1.0.0",
+        "title": "fireantfinance API"
+    },
+    "openapi": "3.0.0",
+    "schemes": ["http"],
+    "components": {
+        "securitySchemes": {
+          "bearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "scheme": "bearer",
+            "in": "header"
+          }
+        }
+      },
+    "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+    "tags": [
+        {
+            "name": "system",
+            "description": "API System Configuration",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "auth",
+            "description": "API auth",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "user",
+            "description": "Operations about user",
+            "externalDocs": {
+                "description": "Find out more about our store",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "bo-user"
+        },
+        {
+            "name": "project"
+        },
+        {
+            "name": "portfolio"
+        },
+        {
+            "name": "section"
+        },
+        {
+            "name": "project-post"
+        },
+        {
+            "name": "utility"
+        },
+        {
+            "name": "transaction"
+        }
+    ],
+    "paths" : {
+        "/api/v1/bo/auth/login": {
+            "post": {
+                "summary" : "Login the bo",
+                "description": "Create the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "requestBody": {
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            }
+                            },
+                          "required": ["email", "password"] 
+                        }
+                      }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/auth/logout": {
+            "get": {
+                "summary" : "Logout the bo",
+                "description": "Logout the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/user/fordevonly": {
+            "post": {
+                "summary" : "Create BO user for dev",
+                "description": "Create the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "requestBody": {
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            }
+                            },
+                          "required": ["email", "password"] 
+                        }
+                      }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/user/me": {
+            "get": {
+                "summary" : "Get BO user me",
+                "description": "Get the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/user": {
+            "get": {
+                "summary" : "Update BO User",
+                "description": "Update the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary" : "Create BO user me",
+                "description": "Create the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertUserBO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary" : "Update BO User",
+                "description": "Update the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertUserBO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/user/{id}": {
+            "get": {
+                "summary" : "Update BO User",
+                "description": "Update the bo",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "bo-user"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects" : {
+            "get" : {
+                "summary" : "Get all the projects for market site",
+                "description": "Get all the projects for market site",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/features" : {
+            "get" : {
+                "summary" : "Get all the feature projects for market site",
+                "description": "Get all the feature projects for market site",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/hot" : {
+            "get" : {
+                "summary" : "Get hot project for market site",
+                "description": "Get hot project for market site",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project" : {
+            "get" : {
+                "summary" : "Get all the projects",
+                "description": "Get all the projects",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectsResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create the project",
+                "description": "Create the project",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/project/{slug}" : {
+            "get" : {
+                "summary" : "Get project by slug",
+                "description": "Get project by slug",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "project slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project/{id}" : {
+            "get" : {
+                "summary" : "Get project by id",
+                "description": "Get project by id",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectsResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the project",
+                "description": "Update the project",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a project",
+                "description": "Delete the project",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project/sections/{id}" : {
+            "get" : {
+                "summary" : "Get all section by project",
+                "description": "Get all section by project",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/project/sections/{id}" : {
+            "get" : {
+                "summary" : "Get all section by project",
+                "description": "Get all section by project",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/section" : {
+            "get" : {
+                "summary" : "Get all the sections",
+                "description": "Get all the sections",
+                "produces": ["application/json"],
+                "tags": [
+                    "section"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionsResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create the section",
+                "description": "Create the section",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "section"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertSectionItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/section/{id}" : {
+            "get" : {
+                "summary" : "Get all the sections",
+                "description": "Get all the sections",
+                "produces": ["application/json"],
+                "tags": [
+                    "section"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "section id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionsResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the section",
+                "description": "Update the section",
+                "produces": ["application/json"],
+                "tags": [
+                    "section"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "section id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertSectionItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a section",
+                "description": "Delete the section",
+                "produces": ["application/json"],
+                "tags": [
+                    "section"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "section id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sectionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project/post/{id}" : {
+            "get" : {
+                "summary" : "Get all post by project-post",
+                "description": "Get all post by project-post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/project/image/{id}" : {
+            "get" : {
+                "summary" : "Get the project-image",
+                "description": "Get the project-image",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-post id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectImageMappingItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project/image/{id}" : {
+            "get" : {
+                "summary" : "Get image by project-image",
+                "description": "Get image by project-image",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectImageMappingItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project/utility/{id}" : {
+            "get" : {
+                "summary" : "Get all utility by project-utility",
+                "description": "Get all utility by project-utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "project"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectUtilityMapItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-post" : {
+            "get" : {
+                "summary" : "Get all the project-post",
+                "description": "Get all the project-post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-post"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create the project-post",
+                "description": "Create the project-post",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "project-post"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectPostItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-post/{id}" : {
+            "get" : {
+                "summary" : "Get all the project-post",
+                "description": "Get all the project-post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-post"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the post",
+                "description": "Update the post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-post"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectPostItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a post",
+                "description": "Delete the post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-post"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectPostItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-image/{id}" : {
+            "get" : {
+                "summary" : "Get all the project-image",
+                "description": "Get all the project-image",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectImageItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the image",
+                "description": "Update the image",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/updateProjectImageItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectImageItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a image",
+                "description": "Delete the post",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "image id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectImageItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/utility" : {
+            "get" : {
+                "summary" : "Get all the utility",
+                "description": "Get all the utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "utility"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/utilityItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create the utility",
+                "description": "Create the utility",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "utility"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertUtilityItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UtilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/utility/{id}" : {
+            "get" : {
+                "summary" : "Get the utility",
+                "description": "Get the utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "utility id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/utilitysResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the utility",
+                "description": "Update the utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "section id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertUtilityItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/utilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a utility",
+                "description": "Delete the utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "utility id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/utilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-utility" : {
+            "post" : {
+                "summary" : "Create the project-utility",
+                "description": "Create the project-utility",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "project-utility"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectUtilityItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProjectUtilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-utility/{id}" : {
+            "get" : {
+                "summary" : "Get the project-utility",
+                "description": "Get the project-utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-utility id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/projectUtilitysResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update the project-utility",
+                "description": "Update the project-utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-utility id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/upsertProjectUtilityItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProjectUtilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a project-utility",
+                "description": "Delete the project-utility",
+                "produces": ["application/json"],
+                "tags": [
+                    "project-utility"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-utility id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProjectUtilityItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get user",
+                "description": "",
+                "operationId": "getUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successHasDataResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update user",
+                "description": "",
+                "operationId": "updateUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successHasDataResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Update fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "LogIn user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Login fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register user",
+                "description": "",
+                "operationId": "registerUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["email", "password", "name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Create success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Create fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get access token of the user into the system",
+                "description": "",
+                "operationId": "tokenUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refreshToken": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["refreshToken"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Login fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout user in the system",
+                "description": "",
+                "operationId": "logoutUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Logout fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get info me",
+                "description": "",
+                "operationId": "getMe",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successHasDataResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Logout fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/provider/callback": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "LogIn user with provider",
+                "description": "",
+                "operationId": "loginWithProviderUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/loginResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Logout fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get all user",
+                "description": "",
+                "operationId": "getAllUser",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{id}": {
+            "get": {
+                "tags": [
+                    "project"
+                ],
+                "summary": "Get project for market site",
+                "description": "",
+                "operationId": "getProjectMS",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successHasDataResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/parameters": {
+            "post": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Create system configuration",
+                "description": "",
+                "operationId": "createSystemConfiguration",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "object"
+                                    }
+                                },
+                                "required": ["name", "code", "data"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Create success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Create fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get all system configuration",
+                "description": "",
+                "operationId": "getAllSystem",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/parameters/configs": {
+            "post": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Select system configurations by code",
+                "description": "",
+                "operationId": "selectSystemConfigurationByCode",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "codes": {
+                                        "type": "array",
+                                        "xml": {
+                                            "wrapped": true
+                                        },
+                                        "items": {
+                                            "type": "string",
+                                            "xml": {
+                                                "name": "codes"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": ["codes"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successHasDataResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "get fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/parameters/{id}": {
+            "get": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get system config",
+                "description": "",
+                "operationId": "getSystemConfig",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Update system config",
+                "description": "",
+                "operationId": "updateSystemConfig",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Update fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "del system config",
+                "description": "",
+                "operationId": "delSystemConfig",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Delete fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/portfolios/holders/{id}": {
+            "get": {
+                "tags": [
+                    "portfolio"
+                ],
+                "summary": "Get holders",
+                "description": "",
+                "operationId": "getHolder",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get success",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/portfolios": {
+            "get": {
+                "tags": [
+                    "portfolio"
+                ],
+                "summary": "Get all portfolio of user",
+                "description": "",
+                "operationId": "getAllPortfolio",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all portfolio",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successPaginationResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/project-image": {
+            "post": {
+                "tags": [
+                    "project-image"
+                ],
+                "summary": "Save file link",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "fileLink": {
+                                        "type": "string"
+                                    },
+                                    "project": {
+                                        "type": "string"
+                                    },
+                                    "isPrimary": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": ["fileLink", "project"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Save file link successfully",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/file-link/signed-url": {
+            "post": {
+                "tags": [
+                    "file-link"
+                ],
+                "summary": "Get signed image",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "entityType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["entityType"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Save file link successfully",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/file-link/signed-url/{id}": {
+            "get": {
+                "tags": [
+                    "file-link"
+                ],
+                "summary": "Get s3",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Save file link successfully",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/file-link/{id}": {
+            "get": {
+                "tags": [
+                    "file-link"
+                ],
+                "summary": "Get signed image",
+                "description": "",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "project-post id that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Save file link successfully",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/successSimpleResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get all fail",
+                        "schema": {
+                            "$ref": "#/definitions/errorSimpleResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/transaction" : {
+            "get" : {
+                "summary" : "Get all the transaction",
+                "description": "Get all the transaction",
+                "produces": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/transaction/{id}" : {
+            "get" : {
+                "summary" : "Get the transaction",
+                "description": "Get the transaction",
+                "produces": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/transaction/verify" : {
+            "post" : {
+                "summary" : "Verify the transaction",
+                "description": "Verify the transaction",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/requestVerifyTransactionItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction" : {
+            "get" : {
+                "summary" : "Get all the transaction",
+                "description": "Get all the transaction",
+                "produces": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionsResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/{id}" : {
+            "get" : {
+                "summary" : "Get the transaction by id",
+                "description": "Get the transaction by id",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/cancel/{id}" : {
+            "post" : {
+                "summary" : "Delete transaction by id",
+                "description": "Delete the transaction by id",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/bo/transaction/cancel/{id}" : {
+            "post" : {
+                "summary" : "Delete transaction by id",
+                "description": "Delete the transaction by id",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "transaction id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                          }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/create" : {
+            "post" : {
+                "summary" : "create the transaction",
+                "description": "create the transaction",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/createTransactionItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/request-confirm" : {
+            "post" : {
+                "summary" : "Request confirm the transaction",
+                "description": "Request confirm the transaction",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "tags": [
+                    "transaction"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/definitions/requestTransactionItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transactionItem"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "projectsResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/projectItem"
+                        }
+                    }
+                }
+            }
+        },
+        "projectItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "projectType": {
+                    "type": "string"
+                },
+                "project_progress": {
+                    "type": "number"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "lat": {
+                    "type": "string"
+                },
+                "lng": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "contractAddress": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "expectValue": {
+                    "type": "string"
+                },
+                "minBuy": {
+                    "type": "string"
+                },
+                "shares": {
+                    "type": "string"
+                },
+                "timeStart": {
+                    "type": "string"
+                },
+                "timeEnd": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                }
+            }
+        },
+        "sectionsResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/sectionItem"
+                        }
+                    }
+                }
+            }
+        },
+        "sectionItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertSectionItem": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "utilitysResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/utilityItem"
+                        }
+                    }
+                }
+            }
+        },
+        "utilityItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertUtilityItem": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                }
+            }
+        },
+        "projectUtilitysResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/projectUtilityItem"
+                        }
+                    }
+                }
+            }
+        },
+        "projectUtilityItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "utility": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "quatity": {
+                    "type": "number"                
+                }
+            }
+        },
+        "upsertProjectUtilityItem": {
+            "type": "object",
+            "properties": {
+                "project": {
+                    "type": "string"
+                },
+                "utility": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "quatity": {
+                    "type": "number"                
+                }
+            }
+        },
+        "upsertProjectPostItem": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "projectItemsResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/projectPostItem"
+                        }
+                    }
+                }
+            }
+        },
+        "projectPostItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertPorjectPostItem": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertProjectImageItem": {
+            "type": "object",
+            "properties": {
+                "isPrimary": {
+                    "type": "boolean"
+                },
+                "fileLink": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateProjectImageItem": {
+            "type": "object",
+            "properties": {
+                "isPrimary": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "projectImageItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "isPrimary": {
+                    "type": "boolean"
+                },
+                "fileLink": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "projectImageMappingItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "isPrimary": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "projectUtilityMapItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertPorjectImageItem": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "isPrimary": {
+                    "type": "boolean"
+                },
+                "fileLink": {
+                    "type": "number"
+                },
+                "project": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertProjectItem": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "projectType": {
+                    "type": "string"
+                },
+                "lat": {
+                    "type": "string"
+                },
+                "lng": {
+                    "type": "string"
+                },
+                "project_progress": {
+                    "type": "number"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "urlAddress": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "contractAddress": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "expectValue": {
+                    "type": "number"
+                },
+                "minBuy": {
+                    "type": "number"
+                },
+                "shares": {
+                    "type": "number"
+                },
+                "timeStart": {
+                    "type": "string"
+                },
+                "timeEnd": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        },
+        "requestBodySystemConfiguration": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                }
+            }
+        },
+        "loginResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "transactionTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "upsertUserBO": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "successSimpleResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "transactionTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "successPaginationResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "meta": {
+                    "type": "object"
+                },
+                "data": {
+                    "type": "array"
+                },
+                "transactionTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "successHasDataResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "transactionTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "errorSimpleResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "transactionTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "createTransactionItem": {
+            "type": "object",
+            "properties": {
+                "project": {
+                    "type": "string"
+                },
+                "shares": {
+                    "type": "number"
+                }
+            }
+        },
+        "requestVerifyTransactionItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "sharesNet": {
+                    "type": "number"
+                },
+                "priceNet": {
+                    "type": "number"
+                }
+            }
+        },
+        "requestTransactionItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "verifyTransactionItem": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "shares": {
+                    "type": "number"
+                }
+            }
+        },
+        "transactionsResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "code": {
+                         "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/transactionItem"
+                        }
+                    }
+                }
+            }
+        },
+        "transactionItem": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "shares": {
+                    "type": "number"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                },
+                "project": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "priceNet": {
+                    "type": "number"
+                },
+                "sharesNet": {
+                    "type": "number"
+                },
+                "notes": {
+                    "type": "number"
+                },
+                "project_code": {
+                    "type": "string"
+                },
+                "project_name": {
+                    "type": "string"
+                },
+                "user_name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
